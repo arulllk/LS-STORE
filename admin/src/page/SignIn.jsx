@@ -1,6 +1,15 @@
 import React from 'react'
+import InputField from '../components/InputField'
+import CheckBox from '../components/CheckBox'
+
 
 const SignIn = () => {
+  const fruits = ['apple','banana', 'mango'];
+  const favoriteFruits = {
+    favorite:'mango'
+  }
+  console.log('fruits' , fruits);
+
   return (
     <div className="w-full h-lvh  flex justify-center items-center bg-[#f2f7fb] p-[20px]">
        <div className='w-[550px] bg-white  rounded-[20px] p-8 flex flex-col gap-7'> 
@@ -9,21 +18,10 @@ const SignIn = () => {
                 <p className='text-black-water'>Enter your email & password to login</p>
             </div>
             <form className='flex flex-col gap-6'>
-                <fieldset className='flex flex-col '>
-                    <label className='mb-10 font-bold text-sm'>Email address <span className='text-red-600'>*</span></label>
-                    <input className='input-custom' type="email" name="email" placeholder='Enter your email address' value='' />
-                </fieldset>
-
-                <fieldset className='flex flex-col '>
-                    <label className='mb-10 font-bold text-sm'>Password <span className='text-red-600'>*</span></label>
-                    <input className='input-custom' type="email" name="email" placeholder='Enter your password' value='' />
-                </fieldset>
+                <InputField label="Email address" type="email" name="email" placeholder="Enter your email address" required  />
+                <InputField label="Password" type="password" name="password" placeholder="Enter your password" required  />                 
                 <div className='flex justify-between items-center'>
-                  <div className="flex gap-10">
-                    <input type='checkbox' id="signed" />
-                    <label className='text-sm text-black-water'>Keep me signed in</label>
-                  </div>
-
+                  <CheckBox id="signed" label="Keep me signed in" />                   
                   <a href='/' className='text-sm text-bolt-blue'>Forgot password?</a>
                 </div>
                 <a href='/' className='btn-custom'>Login</a>

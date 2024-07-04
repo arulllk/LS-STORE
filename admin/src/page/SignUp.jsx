@@ -12,8 +12,8 @@ const SignUp = () => {
           <fieldset className='flex flex-col '>
               <label className='mb-10 font-bold text-sm'>Your username <span className='text-red-600'>*</span></label>
               <div className="grid  grid-cols-2 gap-4">
-                <input className='input-custom' type="email" name="email" placeholder='Enter your email address' value='' />
-                <input className='input-custom' type="email" name="email" placeholder='Enter your email address' value='' />
+                <input className='input-custom' type="email" name="email" placeholder='Enter your First Name' value='' />
+                <input className='input-custom' type="email" name="email" placeholder='Enter your Last name' value='' />
               </div>
           </fieldset>
 
