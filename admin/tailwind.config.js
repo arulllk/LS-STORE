@@ -55,6 +55,19 @@ module.exports = {
           backgroundColor: '#ffffff',
           color: '#2275fc',
         }, 
+        '.input-custom':{
+          border:'1px solid #ecf0f4',
+          height:'48px',
+          borderRadius:'12px',
+          outline: '0px',
+          boxShadow: 'none',
+          width: '100%',
+          padding: '14px 22px',
+          fontSize: '14px',
+          fontWeight: '400',
+          lineHeight: '20px'
+
+        }
       }
       addUtilities(newUtilities, ['responsive', 'hover']);
     },
