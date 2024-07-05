@@ -1,4 +1,6 @@
 import React from 'react'
+import InputField from '../components/InputField'
+import CheckBox from '../components/CheckBox'
 
 const SignUp = () => {
   return (
@@ -9,34 +11,31 @@ const SignUp = () => {
           <p className='text-black-water'>Enter your personal details to create account</p>
         </div>
         <form className='flex flex-col gap-6'>
-          <fieldset className='flex flex-col '>
-              <label className='mb-10 font-bold text-sm'>Your username <span className='text-red-600'>*</span></label>
-              <div className="grid  grid-cols-2 gap-4">
-                <input className='input-custom' type="email" name="email" placeholder='Enter your First Name' value='' />
-                <input className='input-custom' type="email" name="email" placeholder='Enter your Last name' value='' />
-              </div>
-          </fieldset>
+          <InputField label="Your username" 
+          input={[
+            { type:"text", name:"firstname", placeholder:'Enter your First Name', required:false},
+            { type:"text", name:"lastname", placeholder:'Enter Last Name', required:true}
+          ]}/>
 
-          <fieldset className='flex flex-col '>
-              <label className='mb-10 font-bold text-sm'>Email address <span className='text-red-600'>*</span></label>
-              <input className='input-custom' type="email" name="email" placeholder='Enter your email address' value='' />
-          </fieldset>
+          <InputField label="Email address" 
+          input={[
+            { type:"email", name:"email", placeholder:'Enter your email address', required:true},                       
+          ]}/>
 
-          <fieldset className='flex flex-col '>
-              <label className='mb-10 font-bold text-sm'>Password <span className='text-red-600'>*</span></label>
-              <input className='input-custom' type="email" name="email" placeholder='Enter your password' value='' />
-          </fieldset>
+          <InputField label="Password" 
+          input={[
+            { type:"password", name:"password", placeholder:'Enter your password', required:true},           
+          ]}/>
 
-          <fieldset className='flex flex-col '>
-              <label className='mb-10 font-bold text-sm'>Confirm password <span className='text-red-600'>*</span></label>
-              <input className='input-custom' type="email" name="email" placeholder='Enter your password' value='' />
-          </fieldset>
+          <InputField label="Confirm password" 
+          input={[
+            { type:"password", name:"confrimpassword", placeholder:'Retype your password', required:true},           
+          ]}/>
+                   
+                 
 
           <div className='flex justify-between items-center'>
-            <div className="flex gap-10">
-              <input type='checkbox' id="signed" />
-              <label className='text-sm text-black-water'>Keep me signed in</label>
-            </div>            
+            <CheckBox  id="agreePrivacy" label="Agree with Privacy Policy" />                       
           </div>
           <a href='/' className='btn-custom'>Login</a>
         </form>

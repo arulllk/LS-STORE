@@ -4,6 +4,11 @@ import CheckBox from '../components/CheckBox'
 
 
 const SignIn = () => {
+  const fruits = ['apple','banana', 'mango'];
+  const favoriteFruits = {
+    favorite:'mango'
+  }
+  console.log('fruits' , fruits);
 
   return (
     <div className="w-full h-lvh  flex justify-center items-center bg-[#f2f7fb] p-[20px]">
@@ -13,16 +18,8 @@ const SignIn = () => {
                 <p className='text-black-water'>Enter your email & password to login</p>
             </div>
             <form className='flex flex-col gap-6'>
-                <InputField label="Email address" 
-                  input={[
-                    { type:"email", name:"email", placeholder:"Enter your email address", required:true }
-                  ]}                
-                />
-                <InputField label="Password"
-                  input={[
-                    {type:"password", name:"password", placeholder:"Enter your password", required:true  }
-                  ]}
-                 />      
+                <InputField label="Email address" type="email" name="email" placeholder="Enter your email address" required  />
+                <InputField label="Password" type="password" name="password" placeholder="Enter your password" required  />                 
                 <div className='flex justify-between items-center'>
                   <CheckBox id="signed" label="Keep me signed in" />                   
                   <a href='/' className='text-sm text-bolt-blue'>Forgot password?</a>
