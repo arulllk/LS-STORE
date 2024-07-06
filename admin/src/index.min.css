@@ -1,1 +1,1 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap);@tailwind base;@tailwind components;@tailwind utilities;body{@apply font-sans;}
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap);@tailwind base;@tailwind components;@tailwind utilities;body{@apply font-sans;}input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focus,input:-webkit-autofill:hover{-webkit-box-shadow:0 0 0 1000px #fff inset!important;box-shadow:0 0 0 1000px #fff inset!important;-webkit-text-fill-color:#000!important}

@@ -4,7 +4,6 @@ import CheckBox from '../components/CheckBox'
 
 
 const SignIn = () => {
-
   return (
     <div className="w-full h-lvh  flex justify-center items-center bg-[#f2f7fb] p-[20px]">
        <div className='w-[550px] bg-white  rounded-[20px] p-8 flex flex-col gap-7'> 
