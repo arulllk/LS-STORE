@@ -1,10 +1,32 @@
-const {CustomAPIError } = require('../errors')
-
-const errorHandlerMiddleware = (err, req, res, next) => {
-    if (err instanceof CustomAPIError) {
-      return res.status(err.statusCode).json({ msg: err.message })
+const errorHandlerMiddleware = (err,req,res,next) => {   
+    let customError = {
+        // set default error 
+        statusCode:err.statusCode || 500,       
+        msg: err.message || 'Some thing went wrong',
     }
-    return res.status(500).json({ err })
+     
+    if (err.code && err.code === 11000) {     
+        //customError.msg = `${ Object.keys(err.keyValue)} already taken`
+        customError.msg = 'Duplicate key error'
+        const tempError = {}
+        const field =  Object.keys(err.keyValue)[0];      
+        tempError[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} already exist`
+        customError.error = tempError;        
+    }
+    
+  if(err.name === 'ValidationError') {
+    customError.statusCode =  400;    
+    const tempError =  Object.keys(err.errors).reduce((acc,key)=>{
+        acc[key] = err.errors[key].message
+        return acc;
+    },{})
+    customError.error = tempError;
+    customError.msg = 'Validation Failed'
   }
   
-  module.exports = errorHandlerMiddleware
+
+    return res.status(500).json({ err })
+    return res.status(customError.statusCode).json({status:'Error',message:customError.msg, errors:customError.error})
+}
+
+module.exports = errorHandlerMiddleware;
