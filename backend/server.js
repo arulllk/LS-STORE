@@ -6,7 +6,7 @@ const app =  express();
 
  
  const upload = require('./middleware/multer.middleware');
- const {uploadOnCloudinary} = require('./utils/cloudinary');  
+
 
 
 
@@ -24,20 +24,7 @@ app.use(express.json())
 
 //route
 app.use('/api/v1/auth',authRouter)
-app.use('/api/v1/blog',authenticateUser, blogRouter)
-
-app.post('/api/v1/upload', upload.single('image') ,async (req,res)=>{
-    try {
-        const filePath = req.file.path;
-        //upload file to cloudinary
-        const result = await uploadOnCloudinary(filePath,'Blog');
-        console.log('result ', result);
-        res.json({url:result.secure_url})
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({error:"Failed to upload image"})
-    }
-})
+app.use('/api/v1/blog',  upload.single('image'), blogRouter)
 
 //error handlers
 app.use(notFoundMiddleware);

@@ -8,16 +8,25 @@ cloudinary.config({
 });
 
 const uploadOnCloudinary = async (filePath,folder) => {
+    console.log('come isnde cloudi');
+    if(!filePath) return null;
+    if (!fs.existsSync(filePath)) {
+        console.log('File does not exists ', filePath);
+        return null
+    }
     try {
-        if(!filePath) return null;
         const response  = await cloudinary.uploader.upload(filePath,{
             resource_type:"auto",
-            folder:folder
-        })
-        console.log('file uploaded successfully ', response.url);
+            folder:folder           
+        })      
+        console.log('response ', response);
+        //fs.unlinkSync(filePath);
         return response;
     } catch (error) {
-        fs.unlinkSync(filePath);
+        console.log('come inside error sect', error)
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }        
         return null
     }
 }
