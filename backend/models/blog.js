@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const blogSchema = new mongoose.Schema({
-    title:{type:String,required:[true,'Title cant be empty'], minlength:5, maxlength:100 },
+    title:{type:String,required:[true,'Title cant be empty'], minlength:5, maxlength:40 },
     content:{type:String,required:[true,'Blog cant be empty'] },
     topic:{type:String, },
     seoTitle:{type:String},
@@ -16,11 +16,11 @@ const blogSchema = new mongoose.Schema({
 
 blogSchema.pre('save',async function(next){    
     // check if the title is modified
-    // if(!this.isModified(this.title)){
-    //     console.log('comes inside slug creations');
-    //     // if title is not modified skip the slug generation
-    //     return next();
-    // }
+    if(!this.isModified(this.title)){
+        console.log('comes inside slug creations');
+        // if title is not modified skip the slug generation
+        return next();
+    }
 
     //Generate base slug from the title
     const slugBase =  this.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');

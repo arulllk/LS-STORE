@@ -12,7 +12,9 @@ module.exports = {
         'dreamless-sleep': '#111111',
         'black-water': '#575864',
         'powder-white': '#ecf0f4',
-        'bolt-blue': '#2275fc'
+        'bolt-blue': '#2275fc',
+        'pale-sky':'#f2f7fb',
+        'perfect-storm':'#95989dff'
       },
       margin:{
         '10':'.625rem'
@@ -26,7 +28,11 @@ module.exports = {
       gap:{
         '10':'.625rem'
       },
-
+      borderRadius:{
+      },
+      boxShadow: {
+        'custom-box': '0 4px 24px 0 rgba(20, 25, 38, 0.05)',
+      },
     },
   },
   plugins: [
@@ -56,8 +62,7 @@ module.exports = {
           color: '#2275fc',
         }, 
         '.input-custom':{
-          border:'1px solid #ecf0f4',
-          height:'48px',
+          border:'1px solid #ecf0f4',         
           borderRadius:'12px',
           outline: '0px',
           boxShadow: 'none',
@@ -66,8 +71,42 @@ module.exports = {
           fontSize: '14px',
           fontWeight: '400',
           lineHeight: '20px'
-
+        },
+        '.page-heading':{
+          fontSize:'24px',
+          lineHeight:'37px',
+          color:'#000000',
+          fontWeight:700,         
+        },
+        '.white-box-cont':{
+          display:'flex',
+          padding:'24px',
+          flexDirection:'column',
+          gap:'24px',
+          borderRadius:'12px',
+          backgroundColor:'#ffffff',
+          boxShadow:'0 4px 24px 2px rgba(20,25,38,.05)'
+        },
+        '.image-upload-cont':{
+          width:'100%',
+          height:'208px',
+          border:'1px dashed #2275fc',
+          display:'flex',
+          alignItems:'center',
+          justifyContent:'center',
+          borderRadius:'12px'
+        },
+        '.uploaded-img-cont':{
+          width:'100%',
+          height:'208px',
+          border:'1px dotted #2275fc',
+          display:'flex',
+          alignItems:'center',
+          justifyContent:'center',
+          borderRadius:'12px'
         }
+        
+
       }
       addUtilities(newUtilities, ['responsive', 'hover']);
     },

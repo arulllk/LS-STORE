@@ -15,9 +15,7 @@ const createBlog = async (req,res) => {
     const imagePath = req.file.path
 
     //upload image to cloudinary
-    const result = await uploadOnCloudinary(imagePath,'Blog');
-    console.log('image res ', result);
-    console.log('req is ', req.body);
+    const result = await uploadOnCloudinary(imagePath,'Blog'); 
     const newBlog = new Blog({title , content, topic, seoTitle, seoDescription, altImage , slug , image:result.secure_url}) 
     await newBlog.save();
     //fs.unlinkSync(imagePath);

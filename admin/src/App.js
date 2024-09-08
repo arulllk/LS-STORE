@@ -2,6 +2,10 @@ import { Routes,Route} from 'react-router-dom';
 import SignIn from './page/SignIn';
 import SignUp from './page/SignUp';
 import Layout from './components/Layout';
+import Home from './page/Home';
+import AddBlog from './page/AddBlog';
+import BlogList from './page/BlogList';
+
 
 function App() {
   return (
@@ -11,8 +15,11 @@ function App() {
     // </Routes>
     <Routes>
         <Route element={<Layout />}  >
-
+          <Route path="admin" element={<Home />} />         
+          <Route path='admin/blog' element={<BlogList />} />
+          <Route path='admin/blog/new' element={<AddBlog /> } />
         </Route>
+        <Route path="admin/signup" element={<SignUp />} />
     </Routes>
     
   );
