@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Home from './page/Home';
 import AddBlog from './page/AddBlog';
 import BlogList from './page/BlogList';
+import ImageUpload from './PracticePages/ImageUpload';
 
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
           <Route path="admin" element={<Home />} />         
           <Route path='admin/blog' element={<BlogList />} />
           <Route path='admin/blog/new' element={<AddBlog /> } />
+
+
+          <Route path="admin/image/upload" element={<ImageUpload />} />
         </Route>
         <Route path="admin/signup" element={<SignUp />} />
     </Routes>

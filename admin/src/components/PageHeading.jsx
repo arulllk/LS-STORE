@@ -9,7 +9,7 @@ function PageHeading ({heading, breadCrumb}) {
             <h1 className='page-heading'>{heading}</h1>   
             {breadCrumb && 
                 <ul className='flex gap-10 text-xs text-black-water'>
-                    <li><NavLink to="">Admin</NavLink></li>
+                    <li><NavLink to="/admin">Admin</NavLink></li>
                     { breadCrumb.map((item,index)=>{
                         return(
                             <React.Fragment key={index}>

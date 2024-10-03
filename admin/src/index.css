@@ -15,3 +15,26 @@ input:-webkit-autofill:active {
     box-shadow: 0 0 0px 1000px white inset !important;
     -webkit-text-fill-color: #000 !important;
 }
+
+
+/* blog */
+
+.table-col-div {
+  @apply grid grid-cols-[1fr_1.5fr_300px_100px]  p-3 rounded-xl gap-2 items-center
+}
+
+.table-heading {
+  @apply text-sm font-bold text-dreamless-sleep;
+}
+.input-custom {
+  @apply border border-powder-white  rounded-xl outline-0 shadow-none w-full px-5 py-3 leading-5  font-normal       
+}
+.input-custom.error,.image-upload-cont.error  {
+  @apply border-red-600;
+}
+
+.image-upload-cont { 
+  @apply w-full h-[208px] flex items-center justify-center rounded-xl border border-dashed border-bolt-blue
+}   
+
+ 

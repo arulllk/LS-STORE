@@ -7,8 +7,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View Credentials' below to copy your API secret
 });
 
-const uploadOnCloudinary = async (filePath,folder) => {
-    console.log('come isnde cloudi');
+const uploadOnCloudinary = async (filePath,folder) => { 
     if(!filePath) return null;
     if (!fs.existsSync(filePath)) {
         console.log('File does not exists ', filePath);

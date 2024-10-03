@@ -14,7 +14,10 @@ module.exports = {
         'powder-white': '#ecf0f4',
         'bolt-blue': '#2275fc',
         'pale-sky':'#f2f7fb',
-        'perfect-storm':'#95989dff'
+        'perfect-storm':'#95989dff',
+        'table-highlighter':'#f6f8fbcc',
+        'aerospace-orange':'#ff5200',
+        'welsh-onion': '#22c55e'
       },
       margin:{
         '10':'.625rem'
@@ -60,18 +63,7 @@ module.exports = {
         '.btn-custom:hover': {
           backgroundColor: '#ffffff',
           color: '#2275fc',
-        }, 
-        '.input-custom':{
-          border:'1px solid #ecf0f4',         
-          borderRadius:'12px',
-          outline: '0px',
-          boxShadow: 'none',
-          width: '100%',
-          padding: '14px 22px',
-          fontSize: '14px',
-          fontWeight: '400',
-          lineHeight: '20px'
-        },
+        },         
         '.page-heading':{
           fontSize:'24px',
           lineHeight:'37px',
@@ -86,16 +78,7 @@ module.exports = {
           borderRadius:'12px',
           backgroundColor:'#ffffff',
           boxShadow:'0 4px 24px 2px rgba(20,25,38,.05)'
-        },
-        '.image-upload-cont':{
-          width:'100%',
-          height:'208px',
-          border:'1px dashed #2275fc',
-          display:'flex',
-          alignItems:'center',
-          justifyContent:'center',
-          borderRadius:'12px'
-        },
+        },        
         '.uploaded-img-cont':{
           width:'100%',
           height:'208px',
