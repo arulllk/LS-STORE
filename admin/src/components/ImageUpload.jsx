@@ -1,25 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload  } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 
-function ImageUpload({label,hint,required, error, handleChange, handleBlur}) {
+function ImageUpload({label,hint,required, error, setFieldValue,setFieldTouched, handleChange, handleBlur}) {
+  const [filePreview,setFilePreview] = useState(null)
+
+  const handleFileChange = (event) => {
+    const file = event.currentTarget.files[0]
+    setFieldValue('image',file);
+    console.log('file ', file);
+    if(file){
+      setFilePreview(URL.createObjectURL(file))
+    }
+    //setFieldTouched('image',true,true)
+  }
+
+  const deletePreview =() => {    
+    setFilePreview(null)
+  }   
   return (
     <fieldset className='flex flex-col relative'>
       <label className='mb-10 font-bold text-sm'>{label} {required && <span className='text-red-600'>*</span> }</label>  
       <div className='flex gap-10 '>
-        {/* <div className="uploaded-img-cont">
-          <img src="https://lsmedia.linker-cdn.net/291274/2024/13267948.jpeg?d=300" />
-        </div> */}
-        
-        <div className={`image-upload-cont ${error ? 'error' : ''}`}>
-          <label htmlFor='myFile' className='w-full h-full flex items-center justify-center gap-10 cursor-pointer flex flex-col'>
-            <FontAwesomeIcon icon={faUpload } className='text-[20px]' />
-            <span className='w-[177px] text-xs text-center'>Drop your images here or select  <span className='text-bolt-blue'>click to browse</span></span>
-            <input type='file' id='myFile' name='filename' className='absolute invisible opacity-0' />
-          </label>
-        </div>
+        { filePreview && !error  && (
+          <div className="uploaded-img-cont">
+            <img src={filePreview} className='object-cover'  />
+            <div className='absolute top-0 right-0 p-2 bg-white text-black hover:bg-black hover:text-white cursor-pointer' onClick={deletePreview}>
+              <FontAwesomeIcon icon={faTrash } className='text-[20px]' />
+            </div>
+        </div> 
+        )}
+        {
+           !filePreview  && (
+            <div className={`image-upload-cont ${error ? 'error' : ''}`}>
+              <label htmlFor='blogImage' className='w-full h-full flex items-center justify-center gap-10 cursor-pointer flex flex-col'>
+                <FontAwesomeIcon icon={faUpload } className='text-[20px]' />
+                <span className='w-[177px] text-xs text-center'>Drop your images here or select  <span className='text-bolt-blue'>click to browse</span></span>
+                <input type='file' id='blogImage' name='image' className='absolute invisible opacity-0' onChange={handleFileChange} />
+              </label>
+            </div>
+           )
+        }
+
       </div>  
       {error && <p className='text-red-600 text-xs mt-10'>{error}</p>}
     </fieldset>

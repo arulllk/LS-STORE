@@ -15,8 +15,10 @@ const blogSchema = new mongoose.Schema({
 
 
 blogSchema.pre('save',async function(next){    
+    console.log('this is  ');
+    console.log(this);
     // check if the title is modified
-    if(!this.isModified(this.title)){
+    if(!this.isModified('title')){
         console.log('comes inside slug creations');
         // if title is not modified skip the slug generation
         return next();
@@ -31,6 +33,7 @@ blogSchema.pre('save',async function(next){
     while(await mongoose.models.Blog.findOne({slug})){
         slug = `${slugBase}-${suffix}` 
     }
+    console.log('slug ', slug);
     this.slug = slug;
     next();   
 })

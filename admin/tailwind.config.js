@@ -86,7 +86,9 @@ module.exports = {
           display:'flex',
           alignItems:'center',
           justifyContent:'center',
-          borderRadius:'12px'
+          borderRadius:'12px',
+          overflow:'hidden',
+          position:'relative'
         }
         
 
