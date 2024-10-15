@@ -19,7 +19,7 @@ const uploadOnCloudinary = async (filePath,folder) => {
             folder:folder           
         })      
         console.log('response ', response);
-        //fs.unlinkSync(filePath);
+        fs.unlinkSync(filePath);
         return response;
     } catch (error) {
         console.log('come inside error sect', error)

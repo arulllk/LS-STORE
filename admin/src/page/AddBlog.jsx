@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useFormik } from 'formik'
 import axios from 'axios'
 import { blogSchema } from '../schema';
@@ -9,32 +9,55 @@ import SuccessErrorMessage from '../components/SuccessErrorMessage';
 
 
 
-const onSubmit = async (values) => {
-  const formData = new FormData();
-  // Dynamically append all form fields
-  Object.keys(values).forEach(key=>{     
-    formData.append(key,values[key])
-  }) 
 
-   // Debugging: Log FormData entries
-  for (let pair of formData.entries()) {
-    console.log(`check ${pair[0]}: ${pair[1]}`);
-  }
-
-  try {
-    const response = await axios.post('/api/v1/blog', formData, {
-      headers: {
-        'Content-Type':'multipart/form-data'
-      }
-    })
-    console.log('Form Submitted successfully ' , response);
-  } catch (error) {
-      console.log('Error submitting blog');
-  }
-
-}
 
 function AddBlog() {
+  const [showMessage, setShowMessage ] = useState(null);
+  const resetImagePreviewRef = useRef(null);
+  
+
+
+  const onSubmit = async (values, { resetForm }) => {
+    const formData = new FormData();
+    // Dynamically append all form fields
+    Object.keys(values).forEach(key=>{     
+      formData.append(key,values[key])
+    }) 
+  
+     // Debugging: Log FormData entries
+    for (let pair of formData.entries()) {
+      console.log(`check ${pair[0]}: ${pair[1]}`);
+    }
+  
+    try {
+      const response = await axios.post('/api/v1/blog', formData, {
+        headers: {
+          'Content-Type':'multipart/form-data'
+        }
+      })
+      console.log('Form Submitted successfully ' , response);
+      setShowMessage({messageType:'success', message:'Blog Created Successfully' });
+      resetForm();   
+      if (resetImagePreviewRef.current) resetImagePreviewRef.current(); // Reset image preview      
+    } catch (error) {     
+      setShowMessage({messageType:'failure', message:'Some thing wrong happend' });
+    }
+  
+  }
+
+  useEffect(()=>{
+    if(showMessage) {
+      const timer = setTimeout(()=>{
+        setShowMessage(null )
+      },10000)
+      return ()=>clearTimeout(timer)
+    }
+  },[showMessage])
+
+
+
+
+
   const {values, errors, touched, isSubmitting, handleChange,handleBlur,handleSubmit, setFieldValue, setFieldTouched} = useFormik({
     initialValues:{
       title:'',
@@ -48,11 +71,13 @@ function AddBlog() {
     validationSchema:blogSchema,
     onSubmit
   })
-  
+
+
+  console.log('new values ', values);
    
   return (
     <>
-        <SuccessErrorMessage messageType="success" message="Blog Created Successfully" />
+       { showMessage &&  <SuccessErrorMessage messageType={showMessage.messageType} message={showMessage.message} />} 
         <PageHeading heading="Add Blog" breadCrumb={[{label:'AddBlog',path:'/admin/blog'}]} />
         <form onSubmit={handleSubmit} className='grid grid-cols-2 gap-y-8 gap-x-5'>
             <div className="white-box-cont">
@@ -64,8 +89,8 @@ function AddBlog() {
             <div className="white-box-cont">
                 <InputField_v1 inputType="textarea"  label="Seo Description" type="text" name="seoDescription" placeholder="Add Seo Description for your  blog" value={values.seoDescription} handleChange={handleChange} handleBlur={handleBlur} error={ touched.seoDescription && errors.seoDescription ? errors.seoDescription :'' } />
                 <InputField_v1 inputType="input"  label="Image Alt" type="text" name="altImage" placeholder="Add alt tag text for the image" value={values.altImage}  error={touched.altImage && errors.altImage ? errors.altImage : ''} handleChange={handleChange} handleBlur={handleBlur} />
-                <ImageUpload label="Upload images" name="image" required="true" hint=" Pay attention to the quality of the pictures you add, comply with the background color standards. Pictures must be in certain dimensions." error={touched.image && errors.image ? errors.image : ''} setFieldValue={setFieldValue} setFieldTouched={setFieldTouched}  /> 
-                <button type='submit' className='btn-custom'>Add Blog</button>
+                <ImageUpload label="Upload images" name="image" required="true" hint=" Pay attention to the quality of the pictures you add, comply with the background color standards. Pictures must be in certain dimensions." error={touched.image && errors.image ? errors.image : ''} setFieldValue={setFieldValue} setFieldTouched={setFieldTouched} resetPreviewRef={resetImagePreviewRef}  /> 
+                <button type='submit' className='btn-custom' disabled={isSubmitting}>{isSubmitting ? 'From is Submitting' : 'Add Blog' }</button>
             </div>
         </form>         
     </>

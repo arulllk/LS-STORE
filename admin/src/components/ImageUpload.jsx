@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload  } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 
-function ImageUpload({label,hint,required, error, setFieldValue,setFieldTouched, handleChange, handleBlur}) {
+function ImageUpload({label,hint,required, error, setFieldValue,resetPreviewRef }) {
   const [filePreview,setFilePreview] = useState(null)
 
   const handleFileChange = (event) => {
@@ -21,6 +21,20 @@ function ImageUpload({label,hint,required, error, setFieldValue,setFieldTouched,
   const deletePreview =() => {    
     setFilePreview(null)
   }   
+
+  useEffect(()=>{
+    if(resetPreviewRef) {
+      resetPreviewRef.current = () => setFilePreview(null);
+    }
+  },[resetPreviewRef])
+
+
+  useEffect(()=>{
+    if(!filePreview) {
+      setFieldValue('image','');
+    }
+  },[filePreview])
+
   return (
     <fieldset className='flex flex-col relative'>
       <label className='mb-10 font-bold text-sm'>{label} {required && <span className='text-red-600'>*</span> }</label>  
